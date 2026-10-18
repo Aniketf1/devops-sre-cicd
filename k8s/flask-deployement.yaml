@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+  labels:
+    app: flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+        - name: flask
+          image: docker.io/library/docker-tut-backend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 7000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          envFrom:
+            - configMapRef:
+                name: flask-config
+            - secretRef:
+                name: flask-secret
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 7000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 7000
+            initialDelaySeconds: 10
+            periodSeconds: 10

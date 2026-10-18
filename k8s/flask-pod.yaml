@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flask-backend
+  labels:
+    app: flask
+spec:
+  containers:
+  - name: flask-backend
+    image: docker.io/library/docker-tut-backend:latest
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 7000

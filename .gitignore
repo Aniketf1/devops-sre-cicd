@@ -1,0 +1,25 @@
+# Terraform: generated files and potentially sensitive state
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Kubernetes secrets
+k8s/secret.yaml
+
+# Python
+**/venv/
+**/__pycache__/
+*.py[cod]
+
+# Local environment files
+.env
+.env.*
+!.env.example
